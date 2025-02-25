@@ -1,0 +1,25 @@
+[workspace]
+members = [ "client","types"]
+
+[package]
+name = "songquiz"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0.95"
+argh = "0.1.13"
+axum = { version = "0.8.1", features = ["ws"] }
+axum-extra = { version = "0.10.0", features = ["typed-header"] }
+env_logger = "0.11.6"
+lazy_static = "1.5.0"
+log = "0.4.24"
+rand = "0.8.5"
+rspotify = "0.14.0"
+serde = { version = "1.0.217", features = ["derive"] }
+serde_json = "1.0.135"
+tokio = { version = "1.43.0", features = ["full"] }
+types = { path = "types/" }
+
+[build-dependencies]
+wasm-bindgen-cli = "0.2.99"

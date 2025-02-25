@@ -1,0 +1,20 @@
+[package]
+name = "client"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+either = { version = "1.13.0", features = ["serde"] }
+wasm-bindgen = "0.2.99"
+yew = { version = "0.21.0", features = ["csr"] }
+yew-router = "0.18.0"
+types = { path = "../types/" }
+futures = "0.3.31"
+gloo = "0.11.0"
+serde_json = "1.0.135"
+web-sys = { version = "0.3.76", features = ["EventTarget", "HtmlInputElement", "Document", "Element"] }
+url = "2.5.4"
+
+
+[lib]
+crate-type = ["cdylib", "rlib"]
