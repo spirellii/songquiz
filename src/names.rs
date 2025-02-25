@@ -36,7 +36,7 @@ const ADJECTIVES: &[&'static str] = &[
     "Anmutige",
     "Empathische",
     "Rücksichtsvolle",
-    "Geduldige"
+    "Geduldige",
 ];
 
 const NOUNS: &[&'static str] = &[
@@ -77,7 +77,6 @@ const NOUNS: &[&'static str] = &[
     "Katzen",
     "Belugawale",
     "Hammerhaie",
-    
 ];
 
 pub fn random_name() -> String {

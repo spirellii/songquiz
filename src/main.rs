@@ -175,8 +175,10 @@ async fn fonts(Path(file): Path<String>) -> axum::response::Result<impl IntoResp
                 include_bytes!("../fonts/FiraSans-ThinItalic.ttf"),
             );
             m.insert(
-                "MaterialSymbolsOutlined-VariableFont_FILL,GRAD,opsz,wght.ttf", 
-                include_bytes!("../fonts/MaterialSymbolsOutlined-VariableFont_FILL,GRAD,opsz,wght.ttf")
+                "MaterialSymbolsOutlined-VariableFont_FILL,GRAD,opsz,wght.ttf",
+                include_bytes!(
+                    "../fonts/MaterialSymbolsOutlined-VariableFont_FILL,GRAD,opsz,wght.ttf"
+                ),
             );
             m
         };
