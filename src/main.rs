@@ -26,23 +26,47 @@ use tokio::{
     net::TcpListener,
     sync::{broadcast::channel, RwLock},
 };
+use url::Url;
 
 #[derive(FromArgs, PartialEq, Debug)]
-/// Server for songquiz-ng
+/// Server for songquiz
 struct Args {
+    /// client id
+    #[argh(option)]
+    client_id: String,
+    /// client secret
+    #[argh(option)]
+    client_secret: String,
+    /// base url this will be served from
+    #[argh(option)]
+    base_url: String,
     /// what address to bind to
     #[argh(positional)]
     bind: String,
+}
+
+fn authorize_url(url: &str) -> Option<String> {
+    let url = url.parse::<Url>().ok()?;
+    match url.scheme() {
+        "http" | "https" => (),
+        _ => return None
+    };
+    url.host()?;
+    Some(url.join("authorize").ok()?.to_string())
 }
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
     env_logger::init();
     let args: Args = from_env();
+    let redirect = authorize_url(&args.base_url).ok_or(anyhow!("got invalid base url"))?;
     let spotify = AuthCodeSpotify::new(
-        Credentials::from_env().ok_or(anyhow!("could not get credentials from environment"))?,
-        OAuth::from_env(scopes!("user-modify-playback-state"))
-            .ok_or(anyhow!("could not get OAuth config from environment"))?,
+        Credentials::new(&args.client_id, &args.client_secret),
+        OAuth {
+            redirect_uri: redirect,
+            scopes: scopes!("user-modify-playback-state"),
+            ..Default::default()
+        }
     );
     let (channel, _) = channel::<Update>(128);
     let game = Game {
