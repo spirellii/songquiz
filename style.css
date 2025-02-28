@@ -246,6 +246,11 @@ button {
     font-weight: 600;
 }
 
+.song-name-smaller {
+    font-weight: 800;
+    font-size: 1rem;
+}
+
 .admin-team-name:focus {
     outline: none;
 }

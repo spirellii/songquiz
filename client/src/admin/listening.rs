@@ -20,7 +20,7 @@ pub fn Listening(props: &Properties) -> Html {
         <div class="song container">
             <img src={song.image.clone()} class="song-image"/>
             <div class="song-info">
-                <div class="song-name">{song.name.clone()}</div>
+                <div class="song-name-smaller">{song.name.clone()}</div>
                 <div class="song-artists">{song.artists.join(", ")}</div>
             </div>
             <button class="admin-stop-song" {onclick}>{"Song stoppen"}</button>
